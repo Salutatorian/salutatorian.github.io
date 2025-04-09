@@ -3,94 +3,32 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>My Blog</title>
-  <style>
-    body {
-      font-family: system-ui, sans-serif;
-      margin: 0;
-      background: #f9f9f9;
-      color: #333;
-    }
-    header {
-      background: #333;
-      color: white;
-      padding: 2rem;
-      text-align: center;
-    }
-    header h1 {
-      margin: 0;
-    }
-    main {
-      max-width: 800px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-    }
-    article {
-      background: white;
-      margin-bottom: 2rem;
-      padding: 1.5rem;
-      border-radius: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-    article h2 {
-      margin-top: 0;
-      color: #444;
-    }
-    article small {
-      display: block;
-      margin-bottom: 1rem;
-      color: #777;
-    }
-    footer {
-      text-align: center;
-      padding: 1rem;
-      background: #333;
-      color: white;
-      position: relative;
-    }
-  </style>
+  <title>Daucloud's Blog</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
   <header>
-    <h1>Welcome to My Blog</h1>
-    <p>Thoughts, updates, and more!</p>
+    <div class="container">
+      <h1 class="logo">Daucloud's Blog</h1>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="#">Posts</a>
+        <a href="#">Tags</a>
+        <a href="#">About</a>
+      </nav>
+    </div>
   </header>
 
-  <main id="blog-posts">
-    <!-- Blog posts will be injected here -->
-  </main>
+  <section class="intro">
+    <img src="images/avatar.png" alt="Avatar" class="avatar">
+    <h2>Daucloud's Blog</h2>
+    <p>Welcome to Daucloud’s Blog! I look forward to sharing this great journey with you.</p>
+  </section>
 
   <footer>
-    &copy; 2025 My Blog. All rights reserved.
+    &copy; 2025 Daucloud's Blog. All rights reserved.
   </footer>
-
-  <script>
-    const posts = [
-      {
-        title: "🌟 Welcome to My Blog!",
-        date: "April 10, 2025",
-        content: "This is my very first post on my new blog! Stay tuned for more content."
-      },
-      {
-        title: "🚀 How I Built This Blog",
-        date: "April 11, 2025",
-        content: "I used GitHub Pages to host my blog for free. No monthly fees! I'll share a tutorial soon."
-      }
-    ];
-
-    const container = document.getElementById('blog-posts');
-
-    posts.forEach(post => {
-      const article = document.createElement('article');
-      article.innerHTML = `
-        <h2>${post.title}</h2>
-        <small>${post.date}</small>
-        <p>${post.content}</p>
-      `;
-      container.appendChild(article);
-    });
-  </script>
 
 </body>
 </html>
