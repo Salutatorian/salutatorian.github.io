@@ -1,0 +1,2 @@
+# salutatorian.github.io
+blogs
