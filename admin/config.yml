@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: Salutatorian/salutatorian.github.io
+  repo: salutatorian/salutatorian.github.io
   branch: main
 
 media_folder: "images/uploads"
