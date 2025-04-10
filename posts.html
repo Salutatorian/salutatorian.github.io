@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Posts - Joshua's Blog</title>
   <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
 
@@ -21,29 +22,58 @@
 
   <section class="intro">
     <h2>My Blog Posts</h2>
-    <p>Here you’ll find all my latest posts, thoughts, and updates!</p>
+    <p>Here you’ll find all my latest posts!</p>
   </section>
 
-  <section class="posts">
-    <!-- Example blog posts -->
-    <article class="post">
-      <h3><a href="#">🌟 Welcome to Joshua's Blog!</a></h3>
-      <small>April 10, 2025</small>
-      <p>This is my very first post! Excited to start this journey and share my thoughts with you.</p>
-    </article>
-
-    <article class="post">
-      <h3><a href="#">🚀 Building My Blog Step by Step</a></h3>
-      <small>April 11, 2025</small>
-      <p>Today, I worked on building the structure of my blog. Stay tuned for updates!</p>
-    </article>
-
-    <!-- More posts will go here dynamically -->
+  <section class="posts" id="posts-container">
+    <p>Loading posts...</p>
   </section>
 
   <footer>
     &copy; 2025 Joshua's Blog. All rights reserved.
   </footer>
+
+  <script>
+    const username = "Salutatorian"; // ✅ Your GitHub username
+    const repo = "salutatorian.github.io"; // ✅ Your repository name
+
+    async function fetchPosts() {
+      try {
+        const response = await axios.get(`https://api.github.com/repos/${username}/${repo}/contents/_posts`);
+        const posts = response.data;
+
+        const container = document.getElementById('posts-container');
+        container.innerHTML = '';
+
+        for (let post of posts.reverse()) {
+          const postResponse = await axios.get(post.download_url);
+          const content = postResponse.data;
+
+          const titleMatch = content.match(/title:\s*"(.+)"/);
+          const dateMatch = content.match(/date:\s*(.+)/);
+          const bodyMatch = content.match(/---\s*\n[\s\S]*?\n---\s*\n([\s\S]*)/);
+
+          const title = titleMatch ? titleMatch[1] : 'Untitled';
+          const date = dateMatch ? new Date(dateMatch[1]).toDateString() : '';
+          const excerpt = bodyMatch ? bodyMatch[1].split('\n')[0] : '';
+
+          const article = document.createElement('article');
+          article.classList.add('post');
+          article.innerHTML = `
+            <h3>${title}</h3>
+            <small>${date}</small>
+            <p>${excerpt}</p>
+          `;
+          container.appendChild(article);
+        }
+      } catch (error) {
+        console.error(error);
+        document.getElementById('posts-container').innerHTML = "<p>Failed to load posts. Please check your repository setup.</p>";
+      }
+    }
+
+    fetchPosts();
+  </script>
 
 </body>
 </html>
